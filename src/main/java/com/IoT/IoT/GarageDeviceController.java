@@ -90,6 +90,4 @@ public class GarageDeviceController {
         return restTemplate.getForObject(uri, GarageDevice.class);
     }
 }
-
-
 //http://webapi.ddns.net/index.php/tempsensor
