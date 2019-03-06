@@ -77,7 +77,7 @@ public class GarageDeviceController {
         if (response.getStatusCode().is2xxSuccessful())
         {
             // lets wait so the device can respond
-            Thread.sleep(500);
+            // Thread.sleep(500);
 
             uri = "http://192.168.0.8/L";
             restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
