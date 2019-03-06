@@ -14,7 +14,7 @@ import java.util.Date;
 class GarageDevice {
     Double temperature;
     Double humidity;
-    String description;
+    String description = "Measures temperature and humidity and can open/close the garage door.";
     Date date;
 
     public String getDescription() {
@@ -64,7 +64,7 @@ public class GarageDeviceController {
         return restTemplate.getForObject(uri, GarageDevice.class);
     }
 
-    @RequestMapping("/push-button")
+    @RequestMapping("/press-button")
     @ResponseBody
     public GarageDevice pushGarageDoorButton() throws Exception {
 
@@ -76,8 +76,8 @@ public class GarageDeviceController {
 
         if (response.getStatusCode().is2xxSuccessful())
         {
-            // lets wait for a second so the device can respond
-            Thread.sleep(1000);
+            // lets wait so the device can respond
+            Thread.sleep(500);
 
             uri = "http://192.168.0.8/L";
             restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
