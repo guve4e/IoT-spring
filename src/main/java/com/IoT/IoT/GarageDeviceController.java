@@ -10,12 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 class GarageDevice {
     Double temperature;
     Double humidity;
     String description = "Measures temperature and humidity and can open/close the garage door.";
     Date date;
+    Double elapsedTime;
+
+    public Double getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public void setElapsedTime(Double elapsedTime) {
+        this.elapsedTime = elapsedTime;
+    }
 
     public String getDescription() {
         return description;
@@ -58,15 +68,25 @@ public class GarageDeviceController {
     @ResponseBody
     public GarageDevice getTemperatureAndHumidity() {
 
+        long startTime = System.nanoTime();
+
         final String uri = "http://192.168.0.8";
         RestTemplate restTemplate = new RestTemplate();
 
-        return restTemplate.getForObject(uri, GarageDevice.class);
+        GarageDevice device = restTemplate.getForObject(uri, GarageDevice.class);
+
+        long elapsedTime = System.nanoTime() - startTime;
+
+        device.elapsedTime = (double)TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS);
+        device.date = new Date();
+        return device;
     }
 
     @RequestMapping("/press-button")
     @ResponseBody
     public GarageDevice pushGarageDoorButton() throws Exception {
+
+        long startTime = System.nanoTime();
 
         String uri = "http://192.168.0.8/H";
         RestTemplate restTemplate = new RestTemplate();
@@ -77,7 +97,7 @@ public class GarageDeviceController {
         if (response.getStatusCode().is2xxSuccessful())
         {
             // lets wait so the device can respond
-            Thread.sleep(500);
+            // Thread.sleep(500);
 
             uri = "http://192.168.0.8/L";
             restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
@@ -87,7 +107,12 @@ public class GarageDeviceController {
             throw new Exception("Was not able to connect to the device!");
         }
 
-        return restTemplate.getForObject(uri, GarageDevice.class);
+        GarageDevice device = restTemplate.getForObject(uri, GarageDevice.class);
+
+        long elapsedTime = System.nanoTime() - startTime;
+
+        device.elapsedTime = (double)TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS);
+        device.date = new Date();
+        return device;
     }
 }
-//http://webapi.ddns.net/index.php/tempsensor
