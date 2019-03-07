@@ -95,19 +95,6 @@ public class GarageDeviceController {
         String uri = "http://192.168.0.8/H";
         RestTemplate restTemplate = new RestTemplate();
 
-        HttpEntity<Object> entity = new HttpEntity<Object>(new HttpHeaders());
-        ResponseEntity<String> response = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-
-        if (response.getStatusCode().is2xxSuccessful())
-        {
-            uri = "http://192.168.0.8/L";
-            restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-        }
-        else
-        {
-            throw new Exception("Was not able to connect to the device!");
-        }
-
         return getGarageDevice(startTime, uri, restTemplate);
     }
 }
