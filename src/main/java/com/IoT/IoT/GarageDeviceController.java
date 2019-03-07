@@ -73,11 +73,15 @@ public class GarageDeviceController {
         final String uri = "http://192.168.0.8";
         RestTemplate restTemplate = new RestTemplate();
 
+        return getGarageDevice(startTime, uri, restTemplate);
+    }
+
+    private GarageDevice getGarageDevice(long startTime, String uri, RestTemplate restTemplate) {
         GarageDevice device = restTemplate.getForObject(uri, GarageDevice.class);
 
         long elapsedTime = System.nanoTime() - startTime;
 
-        device.elapsedTime = (double)TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS);
+        device.elapsedTime = (double) TimeUnit.MILLISECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS);
         device.date = new Date();
         return device;
     }
@@ -96,9 +100,6 @@ public class GarageDeviceController {
 
         if (response.getStatusCode().is2xxSuccessful())
         {
-            // lets wait so the device can respond
-            // Thread.sleep(500);
-
             uri = "http://192.168.0.8/L";
             restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
         }
@@ -107,12 +108,6 @@ public class GarageDeviceController {
             throw new Exception("Was not able to connect to the device!");
         }
 
-        GarageDevice device = restTemplate.getForObject(uri, GarageDevice.class);
-
-        long elapsedTime = System.nanoTime() - startTime;
-
-        device.elapsedTime = (double)TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS);
-        device.date = new Date();
-        return device;
+        return getGarageDevice(startTime, uri, restTemplate);
     }
 }
