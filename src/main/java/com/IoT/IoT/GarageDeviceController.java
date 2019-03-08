@@ -70,7 +70,7 @@ public class GarageDeviceController {
 
         long startTime = System.nanoTime();
 
-        final String uri = "http://192.168.0.8";
+        final String uri = "http://192.168.0.10";
         RestTemplate restTemplate = new RestTemplate();
 
         return getGarageDevice(startTime, uri, restTemplate);
@@ -92,7 +92,7 @@ public class GarageDeviceController {
 
         long startTime = System.nanoTime();
 
-        String uri = "http://192.168.0.8/H";
+        String uri = "http://192.168.0.10/H";
         RestTemplate restTemplate = new RestTemplate();
 
         return getGarageDevice(startTime, uri, restTemplate);
