@@ -55,7 +55,7 @@ class DeviceConnector {
 
         this.request.sendCommand();
 
-        final String uri = "http://192.168.0.10";
+        final String uri = "http://192.168.0.11";
 
         RestTemplate restTemplate = new RestTemplate();
 
@@ -138,7 +138,7 @@ public class GarageDeviceController {
 
         long startTime = System.nanoTime();
 
-        final String uri = "http://192.168.0.11";
+        final String uri = "http://192.168.0.12";
         RestTemplate restTemplate = new RestTemplate();
 
         return getGarageDevice(startTime, uri, restTemplate);
@@ -168,7 +168,7 @@ public class GarageDeviceController {
                 // garage door opening process
                 garageDorIsOpening = true;
 
-                String uri = "http://192.168.0.11/H";
+                String uri = "http://192.168.0.12/H";
                 RestTemplate restTemplate = new RestTemplate();
 
                 return getGarageDevice(startTime, uri, restTemplate);
@@ -176,7 +176,7 @@ public class GarageDeviceController {
             finally {
                 // lets simulate garage door opening
                 // so requests don't queue
-                TimeUnit.SECONDS.sleep(5);
+                TimeUnit.SECONDS.sleep(15);
 
                 // we are finished with the garage door opening
                 garageDorIsOpening = false;
