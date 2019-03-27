@@ -138,7 +138,7 @@ public class GarageDeviceController {
 
         long startTime = System.nanoTime();
 
-        final String uri = "http://192.168.1.14";
+        final String uri = "http://192.168.1.80/temperature";
         RestTemplate restTemplate = new RestTemplate();
 
         return getGarageDevice(startTime, uri, restTemplate);
@@ -168,7 +168,7 @@ public class GarageDeviceController {
                 // garage door opening process
                 garageDorIsOpening = true;
 
-                String uri = "http://192.168.1.14/H";
+                String uri = "http://192.168.1.80/press-button";
                 RestTemplate restTemplate = new RestTemplate();
 
                 return getGarageDevice(startTime, uri, restTemplate);
