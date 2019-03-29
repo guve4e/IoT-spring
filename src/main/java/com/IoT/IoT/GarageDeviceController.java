@@ -125,7 +125,6 @@ class GarageDevice implements Device {
 
 
 @RestController
-
 public class GarageDeviceController {
 
     private boolean garageDorIsOpening = false;
@@ -164,7 +163,7 @@ public class GarageDeviceController {
         {
             try
             {
-                // we are about to start the
+                // we are about to start th
                 // garage door opening process
                 garageDorIsOpening = true;
 
