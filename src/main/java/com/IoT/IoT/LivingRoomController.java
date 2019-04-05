@@ -1,5 +1,6 @@
 package com.IoT.IoT;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,6 +61,7 @@ class Lamp {
 @RestController
 public class LivingRoomController {
 
+    @Scheduled(cron = "0 19 * * *")
     @RequestMapping("/on-off-lamp")
     @ResponseBody
     public Lamp turnOnOff() {
