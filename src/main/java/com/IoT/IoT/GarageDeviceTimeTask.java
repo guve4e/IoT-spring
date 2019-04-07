@@ -13,10 +13,10 @@ public class GarageDeviceTimeTask extends TimerTask {
     @Override
     public void run() {
 
-        try {
-            garageDevice.pushGarageDoorButton();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            garageDevice.pushGarageDoorButton();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }

@@ -1,12 +1,16 @@
 package com.IoT.IoT;
 
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.Trigger;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 class Lamp {
@@ -59,14 +63,11 @@ class Lamp {
 }
 
 @RestController
-public class LivingRoomController {
+public class LivingRoomController implements Runnable {
 
-    @Scheduled(cron = "0 00 19 * * MON-FRI")
-    @Scheduled(cron = "0 30 4 * * MON-FRI")
     @RequestMapping("/on-off-lamp")
     @ResponseBody
     public Lamp turnOnOff() {
-
         long startTime = System.nanoTime();
 
         String uri = "http://192.168.1.61/press-button";
@@ -80,5 +81,12 @@ public class LivingRoomController {
         device.date = new Date();
 
         return device;
+
+    }
+
+    @Override
+    public void run()
+    {
+
     }
 }
