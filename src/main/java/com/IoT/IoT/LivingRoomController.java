@@ -70,6 +70,21 @@ public class LivingRoomController {
         long startTime = System.nanoTime();
 
         String uri = "http://192.168.1.61/press-button";
+        return getLamp(startTime, uri);
+    }
+
+
+    @RequestMapping("/state")
+    @ResponseBody
+    public Lamp getStatus() {
+
+        long startTime = System.nanoTime();
+
+        String uri = "http://192.168.1.61/state";
+        return getLamp(startTime, uri);
+    }
+
+    private Lamp getLamp(long startTime, String uri) {
         RestTemplate restTemplate = new RestTemplate();
 
         Lamp device = restTemplate.getForObject(uri, Lamp.class);

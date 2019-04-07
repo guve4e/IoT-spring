@@ -15,13 +15,13 @@ public class AppStarterRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws ParseException {
         //the Date and time at which you want to execute
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = dateFormatter .parse("2019-04-05 17:06:00");
-
-        //Now create the time and schedule it
-        Timer timer = new Timer();
-
-        //Use this if you want to execute it once
-        timer.schedule(new GarageDeviceTimeTask(), date);
+//        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Date date = dateFormatter .parse("2019-04-05 17:06:00");
+//
+//        //Now create the time and schedule it
+//        Timer timer = new Timer();
+//
+//        //Use this if you want to execute it once
+//        timer.schedule(new GarageDeviceTimeTask(), date);
     }
 }
